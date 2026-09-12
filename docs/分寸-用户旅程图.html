@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>「分寸」用户旅程图</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px; background: #fafaf7; color: #1a1a1a; font-family: -apple-system, "PingFang SC", "Noto Sans CJK SC", sans-serif; font-size: 13px; line-height: 1.5; }
+  h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: 0.5px; }
+  .sub { color: #666; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: 120px repeat(7, 1fr); gap: 1px; background: #d9d6cf; border: 1px solid #d9d6cf; }
+  .cell { background: #fff; padding: 10px 12px; }
+  .head { background: #1f2a44; color: #fff; font-weight: 600; text-align: center; padding: 12px 8px; }
+  .head small { display: block; font-weight: 400; opacity: .75; margin-top: 2px; font-size: 11px; }
+  .label { background: #f0eee8; font-weight: 600; color: #444; display: flex; align-items: center; }
+  .hl { background: #fff8e6; }
+  .emo { text-align: center; font-size: 22px; }
+  .emo small { display: block; font-size: 11px; color: #666; }
+  .tag { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; margin: 1px 2px 1px 0; }
+  .t-fact { background: #e3f1e6; color: #1e6b32; }
+  .t-infer { background: #e6ecf7; color: #2a4c8f; }
+  .t-assume { background: #fbe9e9; color: #a32d2d; }
+  .curve { position: relative; height: 90px; margin: 24px 0 8px 120px; border-bottom: 1px dashed #bbb; }
+  .curve svg { width: 100%; height: 100%; }
+  .legend { margin-top: 20px; color: #555; font-size: 12px; }
+  .legend span { margin-right: 14px; }
+  .kpi { color: #2a4c8f; font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; }
+  .pain { color: #a32d2d; }
+  .action { color: #1e6b32; }
+</style>
+</head>
+<body>
+<h1>「分寸」用户旅程图</h1>
+<div class="sub">角色：品牌/内容负责人（Demo 中由提供真实修改稿的队员本人扮演） · 场景：团队对外文案的持续审核 · 依据：思路文档 ×2 + 评分标准说明</div>
+
+<div class="curve">
+  <svg viewBox="0 0 700 90" preserveAspectRatio="none">
+    <polyline fill="none" stroke="#2a4c8f" stroke-width="2.5"
+      points="50,70 150,50 250,60 350,25 450,35 550,15 650,10" />
+    <g fill="#2a4c8f">
+      <circle cx="50" cy="70" r="4"/><circle cx="150" cy="50" r="4"/><circle cx="250" cy="60" r="4"/>
+      <circle cx="350" cy="25" r="4"/><circle cx="450" cy="35" r="4"/><circle cx="550" cy="15" r="4"/><circle cx="650" cy="10" r="4"/>
+    </g>
+    <g font-size="10" fill="#555" text-anchor="middle">
+      <text x="50" y="85">焦虑</text><text x="150" y="65">中性</text><text x="250" y="75">怀疑</text>
+      <text x="350" y="18">惊喜</text><text x="450" y="50">掌控</text><text x="550" y="10">信任</text><text x="650" y="25">依赖</text>
+    </g>
+  </svg>
+</div>
+
+<div class="grid">
+  <div class="label" style="background:#1f2a44"></div>
+  <div class="head">① 触发<small>产品外</small></div>
+  <div class="head">② 导入<small>P1 导入页</small></div>
+  <div class="head">③ 确认候选<small>P2 候选确认页</small></div>
+  <div class="head">④ 首次审核<small>P3 审核页</small></div>
+  <div class="head">⑤ 反馈<small>P3 动作按钮</small></div>
+  <div class="head">⑥ 复审<small>P3 + 对比条 / P5 对照</small></div>
+  <div class="head">⑦ 长期<small>P4 记忆库 [假设]</small></div>
+
+  <div class="label">用户在做什么</div>
+  <div class="cell">收到同事新稿，发现"又是那个问题"</div>
+  <div class="cell">粘贴上次的原稿 + 修改稿，选场景标签</div>
+  <div class="cell">看 ≤3 条候选判断；每条选解释（2 选 1）、勾范围、四选一处理</div>
+  <div class="cell">粘贴新稿，看逐句标注与四段式卡片</div>
+  <div class="cell">逐条：接受 / 拒绝（3 选 1 原因）/ 这次是例外 / 调整范围</div>
+  <div class="cell">再粘一篇新稿；查看"与上一轮对比"；切换品牌 A/B 看差异</div>
+  <div class="cell">新同事用分寸初审，负责人只看冲突和高风险项</div>
+
+  <div class="label">系统状态变化</div>
+  <div class="cell">—</div>
+  <div class="cell">生成 diff <span class="kpi">D-xxx</span>，调模型提候选</div>
+  <div class="cell">记忆条目 <span class="kpi">candidate → confirmed / project / discarded</span></div>
+  <div class="cell">代码按 scope 过滤规则 → 模型逐句审核 → 校验 <span class="kpi">rule_id</span></div>
+  <div class="cell">更新 <span class="kpi">stats / exceptions[] / scope / history[]</span>；日志落盘</div>
+  <div class="cell">例外已记录但规则未变；被推翻的规则已改版 <span class="kpi">v1→v2</span></div>
+  <div class="cell">规则版本累积，有效性维护</div>
+
+  <div class="label">情绪</div>
+  <div class="cell emo">😩<small>焦虑、疲惫</small></div>
+  <div class="cell emo">😐<small>略期待</small></div>
+  <div class="cell emo">🤨<small>怀疑 → 释然</small></div>
+  <div class="cell emo">😮<small>惊喜 / 挑剔</small></div>
+  <div class="cell emo">🙂<small>掌控感</small></div>
+  <div class="cell emo">😌<small>信任建立</small></div>
+  <div class="cell emo">🤝<small>依赖</small></div>
+
+  <div class="label">痛点</div>
+  <div class="cell pain">同一判断说了很多遍，沉淀不下来，交不给人也交不给 AI</div>
+  <div class="cell pain">不想写长篇规范或复盘</div>
+  <div class="cell pain">怕它学成"不喜欢数字"这种粗糙结论</div>
+  <div class="cell pain">"你凭什么这么说？"</div>
+  <div class="cell pain">反馈成本高就不做了</div>
+  <div class="cell pain">怕例外污染标准；怕纠正没生效</div>
+  <div class="cell pain">换工具 = 丢掉验证过的判断</div>
+
+  <div class="label hl">分寸的介入点</div>
+  <div class="cell hl action">只要求丢进上一次的原稿和修改稿，不要求写规范</div>
+  <div class="cell hl action">只要粘贴；句级 diff 自动生成</div>
+  <div class="cell hl action">系统提假设、人定意图：二选一解释 + 反例预演（"选①则'32%'通过"）</div>
+  <div class="cell hl action">问题句 → 冲突标准 → 历史依据（before/after 原文）→ 建议；无 rule_id 的降级为"通用建议"</div>
+  <div class="cell hl action">4 个按钮；例外不改规则本体；拒绝走不同更新路径</div>
+  <div class="cell hl action">显示"上次你推翻的判断这次表现"；同稿 A/B 并排；UI 显示"加载 N 条、跳过 M 条"</div>
+  <div class="cell hl action">记忆可展开：来源 / 确认 / 范围 / 例外 / 有效性 / 版本历史</div>
+
+  <div class="label">采集指标</div>
+  <div class="cell kpi">—</div>
+  <div class="cell kpi">导入耗时</div>
+  <div class="cell kpi">候选采纳率；用户改写解释次数</div>
+  <div class="cell kpi">命中数；有依据命中占比</div>
+  <div class="cell kpi">接受率 / 拒绝率 / 例外数 / 人工解释次数 / 反馈耗时</div>
+  <div class="cell kpi">重复问题数↓ 人工解释次数↓ 接受率↑（逐轮实际值）</div>
+  <div class="cell kpi">负责人介入率 [假设]</div>
+
+  <div class="label">对应评分维度</div>
+  <div class="cell">真实问题</div>
+  <div class="cell">产品可用性</div>
+  <div class="cell">数据壁垒 · 过程记录</div>
+  <div class="cell">数据壁垒 · 可用性</div>
+  <div class="cell">过程记录 · 持续价值</div>
+  <div class="cell">数据壁垒 · 持续价值</div>
+  <div class="cell">持续价值（愿景）</div>
+
+  <div class="label">证据性质</div>
+  <div class="cell"><span class="tag t-infer">推断</span></div>
+  <div class="cell"><span class="tag t-fact">事实</span></div>
+  <div class="cell"><span class="tag t-fact">事实</span></div>
+  <div class="cell"><span class="tag t-fact">事实</span></div>
+  <div class="cell"><span class="tag t-fact">事实</span><span class="tag t-infer">机制待实现</span></div>
+  <div class="cell"><span class="tag t-infer">推断</span><span class="tag t-assume">需真实数据</span></div>
+  <div class="cell"><span class="tag t-assume">假设</span></div>
+</div>
+
+<div class="legend">
+  <span><span class="tag t-fact">事实</span>材料中明确写出</span>
+  <span><span class="tag t-infer">推断</span>基于材料的合理推断</span>
+  <span><span class="tag t-assume">假设</span>材料未覆盖，需确认或验证</span>
+  · 评委必须看到的三个动作发生在 ③→④（学条件不学禁词）、⑤→⑥（推翻后改变 / 例外不污染）、⑥（同稿换记忆换结论）
+</div>
+</body>
+</html>
